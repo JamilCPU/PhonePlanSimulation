@@ -1,0 +1,31 @@
+Verizon
+Unlimited:80
+5G Plus:70
+4G:60
+
+T-Mobile
+Magenta MAX:85
+Magenta:70
+Essentials:60
+
+Mint
+4GB:25
+10GB:30
+15GB:35
+UNLIMITED:40
+
+AT&T
+STARTER:65
+EXTRA:75
+ELITE:85
+
+Metro
+Basic:30
+Upgraded:40
+Extensive:50
+Ultimate:60
+
+Google-Fi
+Flexible:20
+Simply Unlimited:60
+Unlimited Plus:70
