@@ -1,3 +1,8 @@
+import com.github.javafaker.Faker;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -10,6 +15,7 @@ import java.util.function.IntUnaryOperator;
 public class Carrier {
     private String provider;
     private HashMap<String, Integer> plan;
+    private String[] planKeys;
 
     @Override
     public String toString() {
@@ -19,14 +25,31 @@ public class Carrier {
                 '}';
     }
 
+    public String[] getPlanKeys() {
+        return planKeys;
+    }
+
+    public void setPlanKeys(String[] planKeys) {
+        this.planKeys = planKeys;
+    }
+
     public Carrier(){
 
     }
 
-    public Carrier(String provider)throws IOException {
+    public Carrier(String provider, JsonArray carrierData)throws IOException {
         this.provider = provider;
-        this.plan = readHashMap("carrierplans.txt");
-        System.out.println(this.toString());
+        JsonObject providerData = (JsonObject)carrierData.get(findIndex(provider, carrierData));//Get the JsonObject of the index we find our provider located.
+        Gson gson = new Gson();
+        this.plan = gson.fromJson(providerData.get("plan"), HashMap.class);
+        String parsePlan = "";
+        parsePlan = plan.toString();
+        parsePlan = parsePlan.substring(1,parsePlan.length()-1);
+        String[] plans = parsePlan.split(", ");
+        for(int i=0;i<plans.length;i++){
+            plans[i] = plans[i].substring(0, plans[i].indexOf('='));
+        }
+        this.planKeys = plans;
     }
 
     public String getProvider() {
@@ -49,40 +72,21 @@ public class Carrier {
         return (int)Math.floor(Math.random()*999999999-990000000+1)+990000000;
     }
 
-    public String generatePhoneNumber(Customer customer)throws IOException {
-        customer.getZipCode();
-        URL url = new URL("http://www.fonefinder.net/findzip.php?zipcode=" + customer.getZipCode() + "&zipquerytype=Search+by+Zip");
-        Document doc = Jsoup.connect(String.valueOf(url)).get();
-        Elements elements = doc.select("a[href]");
-        String zipNumber = elements.get(0).text();
-        String digitSet1 = generateRand() + generateRand() + generateRand();
-        String digitSet2 = generateRand() + generateRand() + generateRand() + generateRand();
-        return "(" + zipNumber + ")-" + digitSet1 + "-" + digitSet2;
+    public String generatePhoneNumber()throws IOException {
+        Faker faker = new Faker();
+        return faker.phoneNumber().phoneNumber();
     }
 
-    public HashMap<String, Integer> readHashMap(String file)throws IOException {
-        HashMap<String, Integer> hash = new HashMap<>();
-        BufferedReader in = new BufferedReader(new FileReader(file));
-        String data = "";
-        String[] splitData;
-        while((data = in.readLine()) != null){
-            if(data.equals(this.getProvider())){
-                while(data.trim().isEmpty()){
-                    data = in.readLine();
-                    splitData = data.split(":");
-                    hash.put(splitData[0], Integer.valueOf(splitData[1]));
-                }
+    public int findIndex(String provider, JsonArray carrierData)throws IOException {
+        int foundIndex=0;
+        for(int i=0; i<carrierData.size();i++){
+            JsonObject carrierIndex = (JsonObject) carrierData.get(i);
+            if(carrierIndex.get("provider").getAsString().equals(provider)){
+                System.out.println(i);
+                foundIndex=i;
+                break;
             }
         }
-
-        return hash;
-    }
-
-    private String generateRand(){
-        return String.valueOf((int)Math.floor((Math.random()*9)+1));
-    }
-
-    public static void main(String[] args)throws IOException {
-
+        return foundIndex;
     }
 }

@@ -1,0 +1,60 @@
+[
+{
+  "provider" : "Verizon",
+  "plan" :
+    {
+      "Unlimited":80,
+      "5G Plus":70,
+      "4G":60
+    }
+},
+{
+  "provider": "T-Mobile",
+  "plan":
+    {
+      "Magenta MAX":85,
+      "Magenta":70,
+      "Essentials":60
+    }
+},
+  {
+    "provider" : "Mint",
+    "plan" :
+    {
+      "4GB":25,
+      "10GB":30,
+      "15GB":35,
+      "UNLIMITED":40
+    }
+  },
+  {
+    "provider" : "AT&T",
+    "plan" :
+    {
+      "STARTER":65,
+      "EXTRA":75,
+      "ELITE":85
+    }
+  },
+  {
+    "provider": "Metro",
+    "plan": {
+      "Basic":30,
+      "Upgraded":40,
+      "Expensive":50,
+      "Ultimate":60
+    }
+  },
+  {
+    "provider" : "Google-Fi",
+    "plan" :
+    {
+      "Flexible":20,
+      "Simply Unlimited":60,
+      "Unlimited Plus":70
+    }
+  }
+
+]
+
+

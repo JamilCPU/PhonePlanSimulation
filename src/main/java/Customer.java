@@ -9,14 +9,16 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Level;
 
 public class Customer {
+    private String id;
     private String firstName;
     private String lastName;
     private String city;
     private String state;
-    private int zipCode;
+    private String zipCode;
 
     public String getCity() {
         return city;
@@ -50,33 +52,45 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public int getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(int zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 
     public Customer()throws IOException {
         Faker faker = new Faker();//Randomly generate data for a customer
+        this.id = String.valueOf(UUID.randomUUID());
         this.firstName = faker.address().firstName();
         this.lastName = faker.address().lastName();
         this.city = faker.address().cityName();
         this.state = faker.address().state();
-        this.zipCode = Integer.parseInt(faker.address().zipCode());
+        this.zipCode = faker.address().zipCode();
+        System.out.println(this);
     }
 
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", zipCode=" + zipCode +
-                '}';
+        return "CUSTOMER GENERATED: \n" +
+                "firstName=     " + firstName + '\n' +
+                "lastName=      " + lastName + '\n' +
+                "city=      " + city + '\n' +
+                "state=     " + state + '\n' +
+                "zipCode=       " + zipCode + '\n' +
+                "-------------------------- \n";
+    }
+
+    public String toString2(){
+        return "CUSTOMER: \n" +
+                "firstName=     " + firstName + '\n' +
+                "lastName=      " + lastName + '\n' +
+                "city=      " + city + '\n' +
+                "state=     " + state + '\n' +
+                "zipCode=       " + zipCode + '\n' +
+                "-------------------------- \n";
     }
 
 
