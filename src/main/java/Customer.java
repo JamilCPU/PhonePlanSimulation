@@ -74,24 +74,15 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "CUSTOMER GENERATED: \n" +
-                "firstName=     " + firstName + '\n' +
-                "lastName=      " + lastName + '\n' +
-                "city=      " + city + '\n' +
-                "state=     " + state + '\n' +
-                "zipCode=       " + zipCode + '\n' +
-                "-------------------------- \n";
-    }
-
-    public String toString2(){
         return "CUSTOMER: \n" +
                 "firstName=     " + firstName + '\n' +
                 "lastName=      " + lastName + '\n' +
                 "city=      " + city + '\n' +
                 "state=     " + state + '\n' +
-                "zipCode=       " + zipCode + '\n' +
-                "-------------------------- \n";
+                "zipCode=       " + zipCode + '\n';
     }
+
+
 
 
 }
