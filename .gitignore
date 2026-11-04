@@ -1,0 +1,30 @@
+# Secrets and local data
+.env
+.env.*
+!.env.example
+*.keys
+*.db
+*.sqlite
+*.sqlite3
+
+# Build output and dependencies
+venv/
+.venv/
+__pycache__/
+node_modules/
+bin/
+obj/
+dist/
+build/
+target/
+out/
+*.class
+*.exe
+
+# IDE and OS
+.vs/
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
